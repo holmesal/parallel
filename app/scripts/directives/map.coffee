@@ -59,7 +59,7 @@ angular.module('parallelApp')
 
                 scope.query = geoFire.query 
                     center: scope.location
-                    radius: 1
+                    radius: 5
 
                 scope.query.on 'ready', (data) =>
                     console.log 'data ready!'
@@ -92,11 +92,8 @@ angular.module('parallelApp')
                     # parse the rates into a more workable format
                     @parseRates()
 
-                    # wat time is it and wat does that mean?
-                    @classify()
-
-                    # draw all the lines
-                    @draw() if @style
+                    # update, or just... date?
+                    @update()
 
                 @styles = 
 
@@ -111,6 +108,13 @@ angular.module('parallelApp')
                     dontdoit:
                         color: 'red'
                         weight: 10
+
+            update: ->
+                # wat time is it and wat does that mean?
+                @classify()
+
+                # draw all the lines
+                @draw() if @style
 
             draw: ->
                 # remove the line if it exists
